@@ -8,13 +8,13 @@ export default async function Header() {
   // Navigation Links tailored to your GPA Simulator
   const desktopNavLinks = [
     { name: "Home", href: "/" },
-    { name: "GPA Simulator", href: "/GPA" },
+    { name: "GPA Simulator", href: "/gpa-calculator" },
     { name: "About", href: "/about" },
   ];
 
   const mobileNavLinks = [
     { name: "Home", href: "/" },
-    { name: "GPA Simulator", href: "/GPA" },
+    { name: "GPA Simulator", href: "/gpa-calculator" },
     { name: "About", href: "/about" },
   ];
 

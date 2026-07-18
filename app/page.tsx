@@ -30,7 +30,7 @@ export default function HomePage() {
             </p>
 
             <a
-              href="/GPA"
+              href="/gpa-calculator"
               className="inline-flex items-center gap-2 px-8 py-4 bg-yellow-400 text-slate-950 font-black rounded-xl border-2 border-slate-950 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-yellow-300 hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
             >
               <GraduationCap className="w-5 h-5" />
