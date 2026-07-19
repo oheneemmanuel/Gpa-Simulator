@@ -14,7 +14,6 @@ interface CourseRowProps {
   deleteCourse: (id: string) => void;
 }
 
-// Consider moving this to a shared constants file later!
 const UENR_SCALE = [
   { grade: "A", minPercent: 80, gp: 4.0 },
   { grade: "B+", minPercent: 75, gp: 3.5 },
@@ -41,9 +40,10 @@ export default function CourseRow({
     : null;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-white dark:bg-zinc-950 p-4 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm relative group">
+    // Added max-w-full overflow-hidden to contain inputs and swapped dark:bg-zinc-950 with explicit light backgrounds
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-white p-4 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm relative group max-w-full overflow-hidden">
       {/* Course Name */}
-      <div className="md:col-span-4">
+      <div className="md:col-span-4 min-w-0">
         <label className="block text-[10px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-1">
           Course Name
         </label>
@@ -52,12 +52,13 @@ export default function CourseRow({
           placeholder="e.g. Financial Accounting"
           value={course.name}
           onChange={(e) => onUpdate({ ...course, name: e.target.value })}
-          className="w-full p-2 border rounded-lg text-sm dark:bg-zinc-900 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-zinc-100"
+          // Overrode dark backgrounds to a highly visible light yellow custom layout to match the baseline inputs
+          className="w-full p-2 border rounded-lg text-sm bg-transparent dark:bg-yellow-50 border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-gray-900 shadow-sm"
         />
       </div>
 
       {/* Credit Hours */}
-      <div className="md:col-span-2">
+      <div className="md:col-span-2 min-w-0">
         <label className="block text-[10px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-1">
           Credits
         </label>
@@ -72,12 +73,12 @@ export default function CourseRow({
               credits: parseInt(e.target.value, 10) || 0,
             })
           }
-          className="w-full p-2 border rounded-lg text-sm dark:bg-zinc-900 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-zinc-100"
+          className="w-full p-2 border rounded-lg text-sm bg-transparent dark:bg-yellow-50 border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-gray-900 shadow-sm"
         />
       </div>
 
       {/* Score */}
-      <div className="md:col-span-2">
+      <div className="md:col-span-2 min-w-0">
         <label className="block text-[10px] font-bold text-gray-400 dark:text-zinc-500 uppercase tracking-wider mb-1">
           Score (%)
         </label>
@@ -97,7 +98,7 @@ export default function CourseRow({
               score: value,
             });
           }}
-          className="w-full p-2 border rounded-lg text-sm dark:bg-zinc-900 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-zinc-100"
+          className="w-full p-2 border rounded-lg text-sm bg-transparent dark:bg-yellow-50 border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 dark:text-gray-900 shadow-sm"
         />
       </div>
 
@@ -124,14 +125,13 @@ export default function CourseRow({
       </div>
 
       {/* Delete Action Button */}
-      <div className="md:col-span-1 flex justify-center items-center pt-4 md:pt-0">
+      <div className="md:col-span-1 flex justify-center items-center pt-2 md:pt-0">
         <button
           type="button"
           onClick={() => deleteCourse(course.id)}
           aria-label="Delete course"
-          className="text-gray-400 hover:text-red-500 dark:text-zinc-500 dark:hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-900"
+          className="text-gray-400 hover:text-red-500 dark:text-zinc-500 dark:hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-900 w-full md:w-auto flex justify-center"
         >
-          {/* Simple crisp SVG Trash icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

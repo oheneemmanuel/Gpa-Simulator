@@ -19,7 +19,7 @@ export default function ProfileHeader({
   onProgramNameChange,
 }: ProfileHeaderProps) {
   return (
-    <div className="bg-white dark:bg-zinc-950 p-6 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm space-y-4">
+    <div className="bg-white p-6 rounded-xl border border-gray-200 dark:border-zinc-800 shadow-sm space-y-4">
       <h3 className="text-xs font-extrabold text-gray-400 dark:text-zinc-500 uppercase tracking-wider">
         Academic Profile Baseline
       </h3>
@@ -33,20 +33,36 @@ export default function ProfileHeader({
           <select
             value={programName || ""}
             onChange={(e) => onProgramNameChange(e.target.value)}
-            className="w-full p-2 border rounded-lg text-sm bg-transparent dark:bg-zinc-900 border-gray-300 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+            // Changed dark:bg-zinc-900 to dark:bg-yellow-50 and forced dark text for high visibility
+            className="w-full p-2 border rounded-lg text-sm bg-transparent dark:bg-yellow-50 border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-900"
           >
-            <option value="" disabled>
+            <option value="" disabled className="bg-white text-gray-900">
               Select Program
             </option>
-            <option value="BSc Accounting">BSc Accounting</option>
-            <option value="BSc Information Technology">
+            <option value="BSc Accounting" className="bg-white text-gray-900">
+              BSc Accounting
+            </option>
+            <option
+              value="BSc Information Technology"
+              className="bg-white text-gray-900"
+            >
               BSc Information Technology
             </option>
-            <option value="BSc Software Development">
+            <option
+              value="BSc Software Development"
+              className="bg-white text-gray-900"
+            >
               BSc Software Development
             </option>
-            <option value="BSc Entrepreneurship">Entrepreneurship</option>
-            <option value="BSc Biochemistry">BSc Biochemistry</option>
+            <option
+              value="BSc Entrepreneurship"
+              className="bg-white text-gray-900"
+            >
+              Entrepreneurship
+            </option>
+            <option value="BSc Biochemistry" className="bg-white text-gray-900">
+              BSc Biochemistry
+            </option>
           </select>
         </div>
 
@@ -67,7 +83,8 @@ export default function ProfileHeader({
                 e.target.value === "" ? "" : parseFloat(e.target.value);
               onOldGpaChange(val);
             }}
-            className="w-full p-2 border rounded-lg text-sm bg-transparent dark:bg-zinc-900 border-gray-300 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+            // Overrode dark background to light yellow and ensured text remains visible dark gray
+            className="w-full p-2 border rounded-lg text-sm bg-transparent dark:bg-yellow-50 border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-900"
           />
         </div>
 
@@ -86,7 +103,8 @@ export default function ProfileHeader({
                 e.target.value === "" ? "" : parseInt(e.target.value, 10);
               onOldCreditsChange(val);
             }}
-            className="w-full p-2 border rounded-lg text-sm bg-transparent dark:bg-zinc-900 border-gray-300 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white"
+            // Overrode dark background to light yellow and ensured text remains visible dark gray
+            className="w-full p-2 border rounded-lg text-sm bg-transparent dark:bg-yellow-50 border-gray-300 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-gray-900"
           />
         </div>
       </div>
