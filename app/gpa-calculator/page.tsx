@@ -123,14 +123,23 @@ export default function GPACalculator() {
         oldCredits={oldCredits}
         onOldCreditsChange={setOldCredits}
       />
+      <div>
+        <h3 className="text-xs font-extrabold text-black-600 uppercase tracking-wider">
+          Semester Courses
+        </h3>
+        <p className="text-[11px] sm:text-xs text-black-500">
+          Enter your courses, credit hours, and scores to see your semester GPA
+          and projected cumulative GPA.
+        </p>
+      </div>
 
       {/* Styled Grid/Table Section */}
-      <section className="bg-white black:bg-zinc-950 border border-gray-200 black:border-zinc-800 rounded-xl overflow-hidden shadow-sm">
+      <section className="bg-yellow border border-gray-200 black:border--800 rounded-xl overflow-hidden shadow-sm">
         {/* Desktop/tablet table view */}
         <div className="hidden md:block w-full overflow-x-auto">
           <table className="w-full min-w-[500px] text-left border-collapse">
             <thead>
-              <tr className="bg-gray-50 black:bg-zinc-900 tracking-wider">
+              <tr className="bg-yellow-500 border-b border-gray-200 black:border--800 tracking-wider">
                 <th className="py-3 px-3 w-5/12">Course Name</th>
                 <th className="py-3 px-2 w-2/12">Credits</th>
                 <th className="py-3 px-2 w-2/12">Score (%)</th>
@@ -138,11 +147,11 @@ export default function GPACalculator() {
                 <th className="py-3 px-3 w-1/12 text-center">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 black:divide-zinc-800 text-xs sm:text-sm">
+            <tbody className="divide-y divide-gray-100 black:divide--800 text-xs sm:text-sm">
               {stats.calculatedCourses.map((course) => (
                 <tr
                   key={course.id}
-                  className="hover:bg-gray-50 black:hover:bg-zinc-900/40 transition-colors"
+                  className="hover:bg-gray-50 transition-colors"
                 >
                   <td className="py-2 px-2">
                     <input
@@ -152,7 +161,7 @@ export default function GPACalculator() {
                       onChange={(e) =>
                         updateField(course.id, "name", e.target.value)
                       }
-                      className="w-full px-2.5 py-1.5 border border-gray-300 black:border-zinc-700 rounded-md bg-white black:bg-zinc-900 focus:outline-blue-500 text-gray-900 black:text-white text-xs sm:text-sm shadow-sm"
+                      className="w-full px-2.5 py-1.5 border border-gray-300 black:border--700 rounded-md bg-white focus:outline-blue-500 text-gray-900 text-xs sm:text-sm shadow-sm"
                     />
                   </td>
                   <td className="py-2 px-1">
@@ -167,7 +176,7 @@ export default function GPACalculator() {
                           e.target.value === "" ? "" : Number(e.target.value),
                         )
                       }
-                      className="w-full px-2 py-1.5 border border-gray-300 black:border-zinc-700 rounded-md bg-white black:bg-zinc-900 focus:outline-blue-500 text-gray-900 black:text-white text-xs sm:text-sm shadow-sm"
+                      className="w-full px-2 py-1.5 border border-gray-300 black:border--700 rounded-md bg-white focus:outline-blue-500 text-gray-900 text-xs sm:text-sm shadow-sm"
                     />
                   </td>
                   <td className="py-2 px-1">
@@ -182,11 +191,11 @@ export default function GPACalculator() {
                           e.target.value === "" ? "" : Number(e.target.value),
                         )
                       }
-                      className="w-full px-2 py-1.5 border border-gray-300 black:border-zinc-700 rounded-md bg-white black:bg-zinc-900 focus:outline-blue-500 text-gray-900 black:text-white text-xs sm:text-sm shadow-sm"
+                      className="w-full px-2 py-1.5 border border-gray-300 black:border--700 rounded-md bg-white focus:outline-blue-500 text-gray-900 text-xs sm:text-sm shadow-sm"
                     />
                   </td>
-                  <td className="py-2 px-1 text-center font-semibold text-gray-700 black:text-zinc-300">
-                    <span className="inline-block px-2 py-0.5 bg-gray-100 black:bg-zinc-800 border border-gray-200 black:border-zinc-700 rounded text-[11px] sm:text-xs min-w-[28px]">
+                  <td className="py-2 px-1 text-center font-semibold text-gray-700 black:text--300">
+                    <span className="inline-block px-2 py-0.5 bg-gray-100 black:bg--800 border border-gray-200 black:border--700 rounded text-[11px] sm:text-xs min-w-[28px]">
                       {course.letterGrade}
                     </span>
                   </td>
@@ -206,7 +215,9 @@ export default function GPACalculator() {
         </div>
 
         {/* Mobile stacked-card view */}
-        <div className="md:hidden divide-y divide-gray-100 black:divide-zinc-800">
+       
+        <div className="md:hidden divide-y divide-gray-100 black:divide--800">
+          
           {stats.calculatedCourses.map((course) => (
             <div key={course.id} className="p-3 space-y-2">
               <div className="flex items-center justify-between gap-2">
@@ -217,7 +228,7 @@ export default function GPACalculator() {
                   onChange={(e) =>
                     updateField(course.id, "name", e.target.value)
                   }
-                  className="flex-1 min-w-0 px-2.5 py-1.5 border border-gray-300 black:border-zinc-700 rounded-md bg-white black:bg-zinc-900 focus:outline-blue-500 text-gray-900 black:text-white text-sm shadow-sm"
+                  className="flex-1 min-w-0 px-2.5 py-1.5 border border-gray-300 border-black rounded-md bg-white focus:outline-blue-500 text-gray-900 text-sm shadow-sm"
                 />
                 <button
                   onClick={() => deleteCourse(course.id)}
@@ -230,7 +241,7 @@ export default function GPACalculator() {
 
               <div className="grid grid-cols-3 gap-2 items-center">
                 <div>
-                  <label className="block text-[9px] font-bold text-gray-400 black:text-zinc-500 uppercase tracking-wider mb-1">
+                  <label className="block text-[9px] font-bold text-gray-400 text-black uppercase tracking-wider mb-1">
                     Credits
                   </label>
                   <input
@@ -244,11 +255,11 @@ export default function GPACalculator() {
                         e.target.value === "" ? "" : Number(e.target.value),
                       )
                     }
-                    className="w-full px-2 py-1.5 border border-gray-300 black:border-zinc-700 rounded-md bg-white black:bg-zinc-900 focus:outline-blue-500 text-gray-900 black:text-white text-sm shadow-sm"
+                    className="w-full px-2 py-1.5 border border-gray-300 black:border--700 rounded-md bg-white focus:outline-blue-500 text-gray-900 text-sm shadow-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-[9px] font-bold text-gray-400 black:text-zinc-500 uppercase tracking-wider mb-1">
+                  <label className="block text-[9px] font-bold text-gray-400 text-black tracking-wider mb-1">
                     Score (%)
                   </label>
                   <input
@@ -262,14 +273,14 @@ export default function GPACalculator() {
                         e.target.value === "" ? "" : Number(e.target.value),
                       )
                     }
-                    className="w-full px-2 py-1.5 border border-gray-300 black:border-zinc-700 rounded-md bg-white black:bg-zinc-900 focus:outline-blue-500 text-gray-900 black:text-white text-sm shadow-sm"
+                    className="w-full px-2 py-1.5 border border-gray-300 black:border--700 rounded-md bg-white focus:outline-blue-500 text-gray-900 text-sm shadow-sm"
                   />
                 </div>
                 <div className="text-center">
-                  <label className="block text-[9px] font-bold text-gray-400 black:text-zinc-500 uppercase tracking-wider mb-1">
+                  <label className="block text-[9px] font-bold text-gray-400 text-black uppercase tracking-wider mb-1">
                     Grade
                   </label>
-                  <span className="inline-block px-2 py-1 bg-gray-100 black:bg-zinc-800 border border-gray-200 black:border-zinc-700 rounded text-xs w-full">
+                  <span className="inline-block px-2 py-1 bg-gray-100 text-black border border-gray-200 rounded text-xs w-full">
                     {course.letterGrade}
                   </span>
                 </div>
@@ -287,6 +298,16 @@ export default function GPACalculator() {
           </button>
         </div>
       </section>
+
+      <div>
+        <h3 className="text-xs font-extrabold text-black-600 uppercase tracking-wider">
+          See Results Below
+        </h3>
+        <p className="text-[11px] sm:text-xs text-black-500">
+          Your projected semester GPA and cumulative GPA based on the courses
+          entered above.
+        </p>
+      </div>
 
       <div className="bg-white rounded-xl border border-gray-200 p-1 shadow-sm">
         <GPAStatsSummary
