@@ -4,6 +4,9 @@ import { useState, useMemo } from "react";
 import ProfileHeader from "@/components/ProfileHeader";
 import GPAStatsSummary from "@/components/SemesterCard";
 
+
+
+
 export interface CourseData {
   id: string;
   name: string;
@@ -24,18 +27,58 @@ const UENR_SCALE = [
 
 export default function GPACalculator() {
   const [programName, setProgramName] = useState("");
-  const [oldGpa, setOldGpa] = useState<number | "">(3.22);
-  const [oldCredits, setOldCredits] = useState<number | "">(45);
+  const [oldGpa, setOldGpa] = useState<number | "">("");
+  const [oldCredits, setOldCredits] = useState<number | "">("");
+  const [NumberOfCourses, setNumberOfCourses] = useState<number | "">("");
 
+  // Fix: Initialized the first course with a default name directly
   const [courses, setCourses] = useState<CourseData[]>([
-    { id: "initial-course-1", name: "", credits: "", score: "" },
+    { id: "initial-course-1", name: "Course 1", credits: "", score: "" },
   ]);
+
+  const handleNumberOfCoursesChange = (num: number | "") => {
+    setNumberOfCourses(num);
+
+    if (num === "" || num <= 0) {
+      // Fix: Ensured fallback row keeps a consistent name sequence
+      setCourses([{ id: "initial-course-1", name: "Course 1", credits: "", score: "" }]);
+      return;
+    }
+
+    setCourses((prevCourses) => {
+      const targetLength = num;
+      const currentLength = prevCourses.length;
+
+      if (currentLength < targetLength) {
+        const additionalRowsNeeded = targetLength - currentLength;
+
+        // Fix: Use the index 'i' inside Array.from to get the absolute next number
+        const newRows = Array.from({ length: additionalRowsNeeded }, (_, i): CourseData => ({
+          id: crypto.randomUUID(),
+          name: `Course ${currentLength + i + 1}`,
+          credits: "",
+          score: "",
+        }));
+        return [...prevCourses, ...newRows];
+      } else if (currentLength > targetLength) {
+        return prevCourses.slice(0, targetLength);
+      }
+
+      return prevCourses;
+    });
+  };
 
   const addCourse = () => {
     setCourses((prev) => [
       ...prev,
-      { id: crypto.randomUUID(), name: "", credits: "", score: "" },
+      { 
+        id: crypto.randomUUID(), 
+        name: `Course ${prev.length + 1}`, // Fix: Automatically auto-fills name on button click
+        credits: "", 
+        score: "" 
+      },
     ]);
+    setNumberOfCourses((prev) => (typeof prev === "number" ? prev + 1 : 2));
   };
 
   const updateField = (id: string, field: keyof CourseData, value: any) => {
@@ -49,11 +92,14 @@ export default function GPACalculator() {
   const deleteCourse = (id: string) => {
     if (courses.length <= 1) {
       setCourses([
-        { id: "initial-course-1", name: "", credits: "", score: "" },
+        { id: "initial-course-1", name: "Course 1", credits: "", score: "" },
       ]);
+      setNumberOfCourses(1);
       return;
     }
-    setCourses((prev) => prev.filter((course) => course.id !== id));
+    const updatedCourses = courses.filter((course) => course.id !== id);
+    setCourses(updatedCourses);
+    setNumberOfCourses(updatedCourses.length);
   };
 
   // Live Calculations & Grade previewing
@@ -103,7 +149,6 @@ export default function GPACalculator() {
   }, [courses, oldGpa, oldCredits]);
 
   return (
-    // overflow-x-hidden acts as a baseline block to keep phone layout frames locked in tight
     <main className="max-w-4xl mx-auto p-4 sm:p-6 space-y-6 sm:space-y-8 overflow-x-hidden min-w-0">
       <div>
         <h1 className="text-xl sm:text-2xl font-bold text-gray-900 black:text-white">
@@ -122,12 +167,15 @@ export default function GPACalculator() {
         onOldGpaChange={setOldGpa}
         oldCredits={oldCredits}
         onOldCreditsChange={setOldCredits}
+        NumberOfCourses={NumberOfCourses}
+        onNumberOfCoursesChange={handleNumberOfCoursesChange}
       />
+      
       <div>
-        <h3 className="text-xs font-extrabold text-black-600 uppercase tracking-wider">
+        <h3 className="text-[19px] font-extrabold text-black-600 uppercase tracking-wider">
           Semester Courses
         </h3>
-        <p className="text-[11px] sm:text-xs text-black-500">
+        <p className="text-[12px] sm:text-xs text-black-500">
           Enter your courses, credit hours, and scores to see your semester GPA
           and projected cumulative GPA.
         </p>
@@ -215,12 +263,10 @@ export default function GPACalculator() {
         </div>
 
         {/* Mobile stacked-card view */}
-       
-        <div className="md:hidden divide-y divide-gray-100 black:divide--800">
-          
+        <div className="md:hidden divide-y divide-gray-100 black:divide--800 ">
           {stats.calculatedCourses.map((course) => (
             <div key={course.id} className="p-3 space-y-2">
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center justify-between gap-3">
                 <input
                   type="text"
                   placeholder="Bus: 201"
@@ -300,7 +346,7 @@ export default function GPACalculator() {
       </section>
 
       <div>
-        <h3 className="text-xs font-extrabold text-black-600 uppercase tracking-wider">
+        <h3 className="text-[19px] font-extrabold text-black-600 uppercase tracking-wider">
           See Results Below
         </h3>
         <p className="text-[11px] sm:text-xs text-black-500">

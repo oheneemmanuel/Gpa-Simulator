@@ -8,6 +8,8 @@ interface ProfileHeaderProps {
   onOldCreditsChange: (credits: number | "") => void;
   programName: string;
   onProgramNameChange: (name: string) => void;
+  NumberOfCourses: number | "";
+  onNumberOfCoursesChange: (courses: number | "") => void;
 }
 
 export default function ProfileHeader({
@@ -17,6 +19,8 @@ export default function ProfileHeader({
   onOldCreditsChange,
   programName,
   onProgramNameChange,
+  NumberOfCourses,
+  onNumberOfCoursesChange,
 }: ProfileHeaderProps) {
   return (
     <div className="bg-white p-6 rounded-xl border border-black-200 shadow-sm space-y-4">
@@ -24,7 +28,7 @@ export default function ProfileHeader({
         Student profile
       </h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
         {/* Program Name Input */}
         <div>
           <label className="block text-[10px] font-bold text-black-600 uppercase tracking-wider mb-1">
@@ -33,7 +37,7 @@ export default function ProfileHeader({
           <select
             value={programName || ""}
             onChange={(e) => onProgramNameChange(e.target.value)}
-          
+
             className="w-full p-2 border rounded-lg text-sm bg-transparent  border-black-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black-900 "
           >
             <option value="" disabled className="bg-white text-black-900">
@@ -58,9 +62,12 @@ export default function ProfileHeader({
               value="BSc Entrepreneurship"
               className="bg-white text-black-900"
             >
-              Entrepreneurship
+              BSc Entrepreneurship
             </option>
-            <option value="BSc Biochemistry" className="bg-white text-black-900">
+            <option
+              value="BSc Biochemistry"
+              className="bg-white text-black-900"
+            >
               BSc Biochemistry
             </option>
           </select>
@@ -76,7 +83,7 @@ export default function ProfileHeader({
             step="0.01"
             min="0"
             max="4.0"
-            placeholder="e.g. 3.22"
+            placeholder="e.g. 3.9"
             value={oldGpa}
             onChange={(e) => {
               const val =
@@ -91,7 +98,7 @@ export default function ProfileHeader({
         {/* Prior Total Earned Credits Input */}
         <div>
           <label className="block text-[10px] font-bold text-black-500 uppercase tracking-wider mb-1">
-            Total Earned Credits
+            Credit hours completed
           </label>
           <input
             type="number"
@@ -102,6 +109,25 @@ export default function ProfileHeader({
               const val =
                 e.target.value === "" ? "" : parseInt(e.target.value, 10);
               onOldCreditsChange(val);
+            }}
+            // Overrode dark background to light yellow and ensured text remains visible dark black
+            className="w-full p-2 border rounded-lg text-sm bg-transparent  border-black-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black-900"
+          />
+        </div>
+        {/* Current number of courses */}
+        <div>
+          <label className="block text-[10px] font-bold text-black-500 uppercase tracking-wider mb-1">
+            Current Number of Courses
+          </label>
+          <input
+            type="number"
+            min="0"
+            placeholder="4 or 5"
+            value={NumberOfCourses}
+            onChange={(e) => {
+              const val =
+                e.target.value === "" ? "" : parseInt(e.target.value, 10);
+              onNumberOfCoursesChange(val);
             }}
             // Overrode dark background to light yellow and ensured text remains visible dark black
             className="w-full p-2 border rounded-lg text-sm bg-transparent  border-black-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black-900"
