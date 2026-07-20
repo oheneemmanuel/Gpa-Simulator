@@ -70,6 +70,48 @@ export default function ProfileHeader({
             >
               BSc Biochemistry
             </option>
+            <option
+              value="BSc Medical Laboratory Science"
+              className="bg-white text-black-900"
+            >
+              BSc Medical Laboratory Science
+            </option>
+            <option value="BSc Nursing" className="bg-white text-black-900">
+              BSc Nursing
+            </option>
+            <option value="BSc Pharmacy" className="bg-white text-black-900">
+              BSc Pharmacy
+            </option>
+            <option
+              value="BSc mechanical Engineering"
+              className="bg-white text-black-900"
+            >
+              BSc Mechanical Engineering
+            </option>
+            <option
+              value="BSc Civil Engineering"
+              className="bg-white text-black-900"
+            >
+              BSc Civil Engineering
+            </option>
+             <option
+              value="BSc Medicine"
+              className="bg-white text-black-900"
+            >
+              BSc Medicine
+            </option>
+             <option
+              value="BSc Petroleum Engineering"
+              className="bg-white text-black-900"
+            >
+              BSc Petroleum Engineering
+            </option>
+            <option
+              value="other"
+              className="bg-white text-black-900 italic text-sm"
+            >
+              Other
+            </option>
           </select>
         </div>
 
